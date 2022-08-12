@@ -38,7 +38,9 @@ const posts = [
 const container = document.getElementById('container');
 getPost();
 
+
 function getPost() {
+    let postLike = [];
     posts.forEach(element => {
 
         const post = document.createElement('div');
@@ -115,7 +117,6 @@ function getPost() {
 
         const a = document.createElement('a');
         a.className = 'like-button  js-like-button';
-        a.href = '#';
         a.dataset.postid = element.id; 
         likesCta.append(a);
 
@@ -124,7 +125,7 @@ function getPost() {
         a.append(i);
 
         const likeIcon = document.createElement('span');
-        likeIcon.className = 'like-button__label';
+        likeIcon.classlist = 'like-button__label';
         likeIcon.innerHTML = ' Mi piace';
         a.append(likeIcon);
 
@@ -137,8 +138,14 @@ function getPost() {
         b.innerHTML = `${element.like} persone`
         likesCounter.append(b);
 
-
-
+        
+        // EVENT LISTENER
+        a.addEventListener('click', function(){
+            a.classList.add('like-button--liked');
+            b.innerHTML = `${element.like+1} persone`;
+            postLike.push(element.id)
+            console.log(postLike)
+        })
 
         container.append(post);
     })
