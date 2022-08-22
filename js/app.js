@@ -40,114 +40,125 @@ getPost();
 
 
 function getPost() {
-    let postLike = [];
+    const postLike = [];
     posts.forEach(element => {
 
         const post = document.createElement('div');
         post.className = 'post';
 
 
-
-
         // POST HEADER
         const postHeader = document.createElement('div');
         postHeader.className = 'post__header';
-        post.append(postHeader);
-
+       
         const postMeta = document.createElement('div');
         postMeta.classList = 'post-meta';
-        postHeader.append(postMeta);
+        
 
         const postMetaIcon = document.createElement('div');
         postMetaIcon.className = 'post-meta__icon';
-        postMeta.append(postMetaIcon);
+        
 
         const profileImg = document.createElement('img');
         profileImg.className = 'profile-pic';
         profileImg.src = element.autore.foto;
         profileImg.alt = element.autore.nome;
-        postMetaIcon.append(profileImg);
+        
 
         const postData = document.createElement('div');
         postData.className = 'post-meta__data';
-        postMeta.append(postData);
+        
 
         const postAuthor = document.createElement('div');
         postAuthor.className = 'post-meta__author';
         postAuthor.innerHTML = element.autore.nome;
-        postData.append(postAuthor);
+        
 
         const postTime = document.createElement('div');
         postTime.className = 'post-meta__time';
         postTime.innerHTML = element.data;
+        
+
+        post.append(postHeader);
+        postHeader.append(postMeta);
+        postMeta.append(postMetaIcon);
+        postMetaIcon.append(profileImg);
+        postMeta.append(postData);
+        postData.append(postAuthor);
         postData.append(postTime);
-
-
 
 
         // POST BODY
         const postText = document.createElement('div');
         postText.className = 'post__text';
         postText.innerHTML = element.contenuto;
-        post.append(postText);
+        
 
         const postImg = document.createElement('div')
         postImg.className = 'post__image';
-        post.append(postImg);
+       
 
         const imgEl = document.createElement('img');
         imgEl.src = element.immagine;
-        postImg.append(imgEl)
+    
 
-
+        post.append(postText);
+        post.append(postImg);
+        postImg.append(imgEl);
 
 
         // POST FOOTER
         const postFooter = document.createElement('div');
-        postFooter.className = 'post__footer';
-        post.append(postFooter);
+        postFooter.className = 'post__footer';   
 
         const likes = document.createElement('div');
         likes.className = 'likes js-likes';
         postFooter.append(likes)
 
         const likesCta = document.createElement('div');
-        likesCta.className = 'likes_cta';
-        likes.append(likesCta);
+        likesCta.className = 'likes_cta';  
 
         const a = document.createElement('a');
         a.className = 'like-button  js-like-button';
-        a.dataset.postid = element.id; 
-        likesCta.append(a);
+        a.dataset.postid = element.id;
 
         const i = document.createElement('i');
         i.className = 'like-button__icon fas fa-thumbs-up';
-        a.append(i);
 
         const likeIcon = document.createElement('span');
         likeIcon.classlist = 'like-button__label';
         likeIcon.innerHTML = ' Mi piace';
-        a.append(likeIcon);
 
         const likesCounter = document.createElement('div');
         likesCounter.className = 'likes__counter';
-        likes.append(likesCounter);
 
         const b = document.createElement('b');
         b.className = 'js-likes-counter';
-        b.innerHTML = `${element.like} persone`
+        b.innerHTML = `${element.like} persone`;
+
+
+        post.append(postFooter);
+        postFooter.append(likes)
+        likes.append(likesCta);
+        likesCta.append(a);
+        a.append(i);
+        a.append(likeIcon);
+        likes.append(likesCounter);
         likesCounter.append(b);
 
-        
+
         // EVENT LISTENER
         a.addEventListener('click', function(){
             a.classList.add('like-button--liked');
             b.innerHTML = `${element.like+1} persone`;
-            postLike.push(element.id)
-            console.log(postLike)
+            postLike.push(element.id);
+            console.log(postLike);
         })
-
+        
         container.append(post);
-    })
-}
+
+    });
+};
+
+
 
